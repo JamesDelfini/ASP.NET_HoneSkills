@@ -13,7 +13,7 @@ namespace HoneSkills
         public string Title { get; set; }
         public string Description { get; set; }
         public float FullPrice { get; set; }
-
+            
         public CourseLevel Level { get; set; }
         // One:Many Relationship
         public Author Author { get; set; }
