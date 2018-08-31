@@ -54,6 +54,12 @@ namespace HoneSkills.Migrations
                     Id = 4,
                     Name = "Mark Anthony Consellado",
                     Courses = new Collection<Course>()
+                },
+                new Author
+                {
+                    Id = 5,
+                    Name = "The One",
+                    Courses = new Collection<Course>()
                 }
             };
             foreach(var author in authors)

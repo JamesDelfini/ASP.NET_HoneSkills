@@ -86,6 +86,66 @@ namespace HoneSkills
 
             foreach (var course in courses)
                 Console.WriteLine(course.Title);
+
+            Console.WriteLine();
+
+            // Queries
+            var newQuery =
+                from c in context.Courses
+                where c.Author.Id == 1
+                orderby c.Level descending, c.Title
+                select new { Title = c.Title, Author = c.Author.Name };
+
+            foreach(var course in newQuery)
+                Console.WriteLine("{0} by {1}", course.Title, course.Author);
+
+            Console.WriteLine();
+
+            // Groupings
+            var groups =
+                from c in context.Courses
+                group c by c.Level
+                into g
+                select g;
+
+            foreach (var group in groups)
+            {
+                Console.WriteLine("{0} ({1})", group.Key, group.Count());
+
+                foreach (var course in group)
+                    Console.WriteLine("\t{0}", course.Title);
+            }
+
+            Console.WriteLine();
+
+            // Joins 
+            // Inner Join
+            var innerJoin =
+                from c in context.Courses
+                join a in context.Authors on c.Author.Id equals a.Id
+                select new { Title = c.Title, Author = a.Name };
+            foreach (var inner in innerJoin)
+                Console.WriteLine("{0} by {1}", inner.Title, inner.Author);
+
+            Console.WriteLine();
+
+            // Group Join 
+            var groupJoin = 
+                from c in context.Authors
+                join a in context.Courses on c.Id equals a.Author.Id into g
+                select new { Count = g.Count(), Author = c.Name };
+            foreach (var group in groupJoin)
+                Console.WriteLine("{0} has {1} courses.", group.Author, group.Count);
+
+            Console.WriteLine();
+
+            // Cross Join
+            var crossJoin = 
+                from c in context.Courses
+                from a in context.Authors
+                select new { Title = c.Title, Author = a.Name };
+            foreach (var cross in crossJoin)
+                Console.WriteLine("{0} by {1}", cross.Title, cross.Author);
         }
     }
 }
