@@ -1,6 +1,6 @@
 # ASP.NET_HoneSkills
 
-##Entity Framework 
+## Entity Framework 
 1. First Install Entity Framework at NuGet Package Manager or install via NuGet Package Manager command line.
 * install-package EntityFramework -version x.x.x (Optional)
 2. Only run the this command once lifecycle of the app.
