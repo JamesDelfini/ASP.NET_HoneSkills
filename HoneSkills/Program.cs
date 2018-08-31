@@ -39,11 +39,19 @@ namespace HoneSkills
         Advance = 3
     }
 
+    public class Test
+    {
+        public int Id { get; set; }
+        public string Body { get; set; }
+    }
+
     public class PlutoContext : DbContext
     {
         public DbSet<Course> Courses { get; set; }
         public DbSet<Author> Authors { get; set; }
         public DbSet<Tag> Tags { get; set; }
+
+        public DbSet<Test> Tests { get; set; }
 
         // If the default conventation of the database is changed.
         public PlutoContext()

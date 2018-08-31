@@ -53,6 +53,10 @@
     <Compile Include="Migrations\201808301546529_InitialModel.Designer.cs">
       <DependentUpon>201808301546529_InitialModel.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201808310050414_AddTestTable.cs" />
+    <Compile Include="Migrations\201808310050414_AddTestTable.Designer.cs">
+      <DependentUpon>201808310050414_AddTestTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -64,6 +68,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201808301546529_InitialModel.resx">
       <DependentUpon>201808301546529_InitialModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201808310050414_AddTestTable.resx">
+      <DependentUpon>201808310050414_AddTestTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
