@@ -226,6 +226,15 @@ namespace HoneSkills
                 Author = author.Name,
                 Title = course.Title
             });
+
+            //Partitioning
+            var pages = context.Courses.Skip(10).Take(10);
+            // Element Operators
+            var element = context.Courses.OrderBy(c => c.Level).FirstOrDefault(c => c.FullPrice > 100);
+            //context.Courses.LastOrDefault; // Except using with Database SQL
+            //context.Courses.SingleOrDefault; // Returns results of a single output.
+            //context.Courses.All(c => c.FullPrice > 10) // Returns a boolean; All, Any
+            //context.Courses.Count() // Returns a number of items; Count, Max, Min, Average
         }
     }
 }
