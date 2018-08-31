@@ -89,6 +89,8 @@ namespace HoneSkills
 
             Console.WriteLine();
 
+
+            // LINQ SYNTAX Queries
             // Queries
             var newQuery =
                 from c in context.Courses
@@ -146,6 +148,84 @@ namespace HoneSkills
                 select new { Title = c.Title, Author = a.Name };
             foreach (var cross in crossJoin)
                 Console.WriteLine("{0} by {1}", cross.Title, cross.Author);
+
+            Console.WriteLine();
+
+            // LINQ EXTENSIONS
+            // QUERIES
+            var extCourses = context.Courses
+                .Where(c => c.Level == CourseLevel.Beginner)
+                .OrderByDescending(c => c.Title)
+                .ThenByDescending(c => c.Level)
+                .Select(c => new { Title = c.Title, AuthorName = c.Author.Name });
+            foreach (var ext in extCourses)
+                Console.WriteLine("{0} \n \t by {1}", ext.Title, ext.AuthorName);
+
+            Console.WriteLine();
+
+            var tags1 = context.Courses
+                .Where(c => c.Level == CourseLevel.Beginner)
+                .OrderByDescending(c => c.Title)
+                .ThenByDescending(c => c.Level)
+                .Select(c => c.Tags);
+            Console.WriteLine();
+            Console.WriteLine("Using Select is a list of another list of tags.");
+            foreach (var tag in tags1)
+            {
+                foreach (var _tag in tag)
+                    Console.WriteLine(_tag.Name);
+            }
+
+            var tags2 = context.Courses
+                .Where(c => c.Level == CourseLevel.Beginner)
+                .OrderByDescending(c => c.Title)
+                .ThenByDescending(c => c.Level)
+                .SelectMany(c => c.Tags);
+            Console.WriteLine();
+            Console.WriteLine("Using SelectMany is only list of tags.");
+            foreach (var tag in tags2)
+                Console.WriteLine(tag.Name);
+
+            Console.WriteLine();
+
+            // Groupings
+            var extGroupings = context.Courses.GroupBy(c => c.Level);
+            foreach(var group in extGroupings)
+            {
+                Console.WriteLine(group.Key);
+                foreach (var course in group)
+                    Console.WriteLine("\t" + course.Title);
+            }
+
+            Console.WriteLine();
+            // Joins
+            // Inner Join
+            var extInnerJoin = context.Courses
+                .Join(context.Authors,  
+                        c => c.Author.Id, 
+                        a => a.Id, 
+                        (course, author) => new
+                            {
+                                Title = course.Title,
+                                Author = author.Name
+                            });
+            foreach (var ext in extInnerJoin)
+                Console.WriteLine("{0} by {1}", ext.Title, ext.Author);
+
+            // Group Join
+            var extGroupJoin = context.Authors.GroupJoin(context.Courses, a => a.Id, c => c.Author.Id, (author, course) => new
+            {
+                Author = author.Name,
+                 Courses = course
+                // Courses = course.Count()
+            });
+
+            // Cross Join
+            var extCrossJoin = context.Authors.SelectMany(a => context.Courses, (author, course) => new
+            {
+                Author = author.Name,
+                Title = course.Title
+            });
         }
     }
 }
