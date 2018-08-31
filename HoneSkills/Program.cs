@@ -38,7 +38,6 @@ namespace HoneSkills
         Intermediate = 2,
         Advance = 3
     }
-
     public class Test
     {
         public int Id { get; set; }
@@ -65,6 +64,28 @@ namespace HoneSkills
     {
         static void Main(string[] args)
         {
+            var context = new PlutoContext();
+
+            // LINQ has two different to write queries which are LINQ Syntax (Like SQL) or Extension Methods.
+
+            // LINQ Syntax
+            var query =
+                from c in context.Courses
+                where c.Title.Contains("c#")
+                orderby c.Title
+                select c;
+            foreach(var course in query)
+                Console.WriteLine(course.Title);
+
+            Console.WriteLine();
+
+            // Extension Methods
+            var courses = context.Courses
+                .Where(c => c.Title.Contains("c#"))
+                .OrderBy(c => c.Title);
+
+            foreach (var course in courses)
+                Console.WriteLine(course.Title);
         }
     }
 }
