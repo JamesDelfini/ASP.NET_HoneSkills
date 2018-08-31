@@ -2,12 +2,12 @@
 
 ## Entity Framework 
 1. First Install Entity Framework at NuGet Package Manager or install via NuGet Package Manager command line.
-* install-package EntityFramework -version x.x.x (Optional)
+_install-package EntityFramework -version x.x.x (Optional)_
 2. Only run the this command once lifecycle of the app.
-* enable-migrations
+_enable-migrations_
 3. Adding Migration File
-* add-migration <title> -Force(Optional)
+_add-migration <title> -Force(Optional)_
 4. Updating Database
-* update-database
+_update-database_
 5. Downgrading Database to its Specified Version
-* update-database -TargetMigration:<name> 
+_update-database -TargetMigration:<name>_ 
